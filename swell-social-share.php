@@ -13,12 +13,14 @@
  * @package         Swell_Social_Share
  */
 
+
 define('Swell_Social_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
 
 add_action('swellsocial_add_sharer_script', function () {
     wp_enqueue_script('sharer', 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
 });
+
 
 /**
  * Render Shortcode HTML
@@ -75,7 +77,7 @@ add_shortcode( 'swell-social', function ( $atts ) {
 			'web'      => ['whatsapp'],
 			'via'      => ['x'],
 		],
-		'hashtags' => explode(',', $hashtags),
+		'hashtags' => explode(', ', $hashtags),
 	], $atts );
 
 	ob_start();
@@ -96,15 +98,16 @@ if ( is_admin() ) {
 	add_action('admin_init', 'swellsocial_add_metabox_post_sidebar');
 	add_action('save_post', 'swellsocial_save_metabox_post_sidebar');
 }
+
 /*
  * Funtion to add a meta box to enable/disable the posts.
  */
-function swellsocial_add_metabox_post_sidebar()
-{
+function swellsocial_add_metabox_post_sidebar() {
+
   add_meta_box("social_share", __("Social share", 'swellsocial'), "swellsocial_social_fields", "campaign", "side", "high");
 }
 
-function swellsocial_social_fields(){
+function swellsocial_social_fields() {
 		global $post;
   	// Add an nonce field so we can check for it later.
 		wp_nonce_field( 'swellsocial_inner_custom_box', 'swellsocial_inner_custom_box_nonce' );
@@ -124,8 +127,8 @@ function swellsocial_social_fields(){
 
 		// Display the form, using the current value.
 		?>
-
-		<div>
+		<style><?php include Swell_Social_PLUGIN_DIR . 'resources/styles/admin.css'; ?></style>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_facebook_show">
 				<input type="checkbox" <?php echo $facebook_show ? "checked" : "" ; ?> id="swellsocial_facebook_show" name="swellsocial_facebook_show">
 				<?php _e("Show Facebook?", "swellsocial"); ?>
@@ -133,7 +136,7 @@ function swellsocial_social_fields(){
 		</div>
 
 		<!-- Linkedin -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_linkedin_show">
 				<input type="checkbox" <?php echo $linkedin_show ? "checked" : "" ; ?> id="swellsocial_linkedin_show" name="swellsocial_linkedin_show">
 				<?php _e("Show LinkedIn?", "swellsocial"); ?>
@@ -141,50 +144,50 @@ function swellsocial_social_fields(){
 		</div>
 
 		<!-- X -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_x_show">
 				<input type="checkbox" <?php echo $x_show ? "checked" : "" ; ?> id="swellsocial_x_show" name="swellsocial_x_show">
 				<?php _e("Show x?", "swellsocial"); ?>
 			</label>
-		</div>
-		<div id="swellsocial_x_copy_wrapper" class=" <?php echo ($x_show ? "" : "hidden") ; ?>">
-			<div>
-				<label for="swellsocial_x_copy" class="block" id="swellsocial_x_copy_label"><?php _e("X post", "swellsocial"); ?></label>
-				<textarea id="swellsocial_x_copy" class="block" name="swellsocial_x_copy" rows="3" cols="25" aria-labelledby="swellsocial_x_copy_label"><?php echo $x_copy ?></textarea>
-			</div>
-			<div>
-				<label for="swellsocial_x_via"><?php _e( 'X account to mention?', 'swellsocial' ); ?></label>
-				<input type="text" id="swellsocial_x_via" name="swellsocial_x_via" value="<?php echo esc_attr( $x_via ); ?>" size="25" />
+			<div id="swellsocial_x_copy_wrapper" class="inside-field-wrapper--copy <?php echo ($x_show ? "" : "hidden") ; ?>">
+				<div>
+					<label for="swellsocial_x_copy" class="block" id="swellsocial_x_copy_label"><?php _e("X post", "swellsocial"); ?></label>
+					<textarea id="swellsocial_x_copy" class="block" name="swellsocial_x_copy" rows="3" cols="25" aria-labelledby="swellsocial_x_copy_label"><?php echo $x_copy ?></textarea>
+				</div>
+				<div>
+					<label for="swellsocial_x_via"><?php _e( 'X account to mention?', 'swellsocial' ); ?></label>
+					<input type="text" id="swellsocial_x_via" name="swellsocial_x_via" value="<?php echo  $x_via ? '@' . esc_attr( $x_via ) : ""; ?>" size="25" />
+				</div>
 			</div>
 		</div>
 		
 
 		<!-- Email -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_email_show">
 				<input type="checkbox" <?php echo $email_show ? "checked" : "" ; ?> id="swellsocial_email_show" name="swellsocial_email_show">
 				<?php _e("Show Email?", "swellsocial"); ?>
 			</label>
-		</div>
-		<div id="swellsocial_email_copy_wrapper" class=" <?php echo ($email_show ? "" : "hidden") ; ?>">
-			<label for="swellsocial_email_copy" class="block" id="swellsocial_email_copy_label"><?php _e("Email subject", "swellsocial"); ?></label>
-			<textarea id="swellsocial_email_copy" class="block" name="swellsocial_email_copy" rows="3" cols="25" aria-labelledby="swellsocial_email_copy_label"><?php echo $email_copy ?></textarea>
+			<div id="swellsocial_email_copy_wrapper" class="inside-field-wrapper--copy <?php echo ($email_show ? "" : "hidden") ; ?>">
+				<label for="swellsocial_email_copy" class="block" id="swellsocial_email_copy_label"><?php _e("Email subject", "swellsocial"); ?></label>
+				<textarea id="swellsocial_email_copy" class="block" name="swellsocial_email_copy" rows="3" cols="25" aria-labelledby="swellsocial_email_copy_label"><?php echo $email_copy ?></textarea>
+			</div>
 		</div>
 
 		<!-- Whatsapp -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_whatsapp_show">
 				<input type="checkbox" <?php echo $whatsapp_show ? "checked" : "" ; ?> id="swellsocial_whatsapp_show" name="swellsocial_whatsapp_show">
 				<?php _e("Show Whatsapp?", "swellsocial"); ?>
 			</label>
-		</div>
-		<div id="swellsocial_whatsapp_copy_wrapper" class=" <?php echo ($whatsapp_show ? "" : "hidden") ; ?>">
-			<label for="swellsocial_whatsapp_copy" class="block" id="swellsocial_whatsapp_copy_label"><?php _e("Whatsapp content", "swellsocial"); ?></label>
-			<textarea id="swellsocial_whatsapp_copy" class="block" name="swellsocial_whatsapp_copy" rows="3" cols="25" aria-labelledby="swellsocial_whatsapp_copy_label"><?php echo $whatsapp_copy ?></textarea>
+			<div id="swellsocial_whatsapp_copy_wrapper" class="inside-field-wrapper--copy <?php echo ($whatsapp_show ? "" : "hidden") ; ?>">
+				<label for="swellsocial_whatsapp_copy" class="block" id="swellsocial_whatsapp_copy_label"><?php _e("Whatsapp content", "swellsocial"); ?></label>
+				<textarea id="swellsocial_whatsapp_copy" class="block" name="swellsocial_whatsapp_copy" rows="3" cols="25" aria-labelledby="swellsocial_whatsapp_copy_label"><?php echo $whatsapp_copy ?></textarea>
+			</div>
 		</div>
 
 		<!-- Reddit -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_reddit_show">
 				<input type="checkbox" <?php echo $reddit_show ? "checked" : "" ; ?> id="swellsocial_reddit_show" name="swellsocial_reddit_show">
 				<?php _e("Show Reddit?", "swellsocial"); ?>
@@ -192,7 +195,7 @@ function swellsocial_social_fields(){
 		</div>
 
 		<!-- Hashtags -->
-		<div>
+		<div class="inside-field-wrapper">
 			<label for="swellsocial_field_hashtags"><?php _e( 'Hashtags', 'swellsocial' ); ?></label>
 			<input type="text" id="swellsocial_field_hashtags" name="swellsocial_field_hashtags" value="<?php echo esc_attr( $hashtags ); ?>" size="25" />
 		</div>
@@ -227,7 +230,7 @@ function swellsocial_social_fields(){
 			function hashtagize(text) {
 				if (typeof text !== 'string') return false;
 
-				return text.replace(/[^a-zA-Z0-9\s]/g, '').replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+				return text.trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
 						return index === 0 ? word.toLowerCase() : word.toUpperCase();
 					}).replace(/\s+/g, '');
 			}
@@ -246,11 +249,14 @@ function swellsocial_social_fields(){
 		<?php
 }
 
+function swellsocial_admin_scripts() {
+	
+}
+
 /*
  * Save the Enable/Disable sidebar meta box value
  */
-function swellsocial_save_metabox_post_sidebar($post_id)
-{
+function swellsocial_save_metabox_post_sidebar($post_id) {
 		/*
 		 * We need to verify this came from the our screen and with proper authorization,
 		 * because save_post can be triggered at other times.
@@ -306,7 +312,7 @@ function swellsocial_save_metabox_post_sidebar($post_id)
 		update_post_meta( $post_id, '_swellsocial_linkedin_show', $linkedin_show );
 		update_post_meta( $post_id, '_swellsocial_x_show', $x_show );
 		update_post_meta( $post_id, '_swellsocial_x_copy', $x_copy );
-		update_post_meta( $post_id, '_swellsocial_x_via', $x_via );
+		update_post_meta( $post_id, '_swellsocial_x_via', str_replace('@','', $x_via) );
 		update_post_meta( $post_id, '_swellsocial_email_show', $email_show );
 		update_post_meta( $post_id, '_swellsocial_email_copy', $email_copy );
 		update_post_meta( $post_id, '_swellsocial_whatsapp_show', $whatsapp_show );

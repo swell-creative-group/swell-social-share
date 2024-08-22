@@ -1,0 +1,17 @@
+#social_share .inside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.675rem;
+}
+.inside-field-wrapper, .inside-field-wrapper--copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.inside-field-wrapper--copy.hidden {
+  display: none;
+}
+.inside-field-wrapper label {
+  font-size: 1rem; 
+  font-weight: 500;
+}
