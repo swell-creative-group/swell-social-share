@@ -22,11 +22,11 @@
             data-web="true"
           <?php endif; ?>
           <?php if ( in_array($social['name'], $socials->options['via']) ): ?>
-            data-via="ourfuture_la"
+            data-via="<?php echo $social['via']; ?>"
           <?php endif; ?>
           data-url="<?php echo get_permalink(); ?>"
         >
-          <span class="<?php echo SocialShare::getFAIcon($social['name']); ?>" class="text-white" aria-label="Share on <?php echo $social['name']; ?>"></span>
+          <span class="<?php echo SwellSocialGetFAIcon($social['name']); ?>" class="text-white" aria-label="Share on <?php echo $social['name']; ?>"></span>
         </button>
       </li>
     <?php endforeach; ?>
