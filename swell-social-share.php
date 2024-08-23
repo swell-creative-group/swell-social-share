@@ -17,18 +17,24 @@
 define('Swell_Social_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
 
+
 add_action('swellsocial_add_sharer_script', function () {
-    wp_enqueue_script('sharer', 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
+	wp_register_script('sharer', 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
 });
 
+function shortcode_footer_func() {
+  wp_enqueue_style( 'swellsocial', plugin_dir_url(__FILE__) . 'resources/styles/plugin.css' );
+}
+
+add_action( 'wp_footer', 'shortcode_footer_func' );
 
 /**
  * Render Shortcode HTML
  */
-add_shortcode( 'swell-social', function ( $atts ) {
+add_shortcode( 'social-share', function ( $atts ) {
 	global $post;
-  do_action('swellsocial_add_sharer_script');
 
+  do_action('swellsocial_add_sharer_script');
 	// Use get_post_meta to retrieve an existing value from the database.
 	$hashtags 		 = get_post_meta( $post->ID, '_swellsocial_field_hashtags', true );
 	$facebook_show = get_post_meta( $post->ID, '_swellsocial_facebook_show', true );
@@ -128,6 +134,7 @@ function swellsocial_social_fields() {
 		// Display the form, using the current value.
 		?>
 		<style><?php include Swell_Social_PLUGIN_DIR . 'resources/styles/admin.css'; ?></style>
+		<p>Use the shortcode <code>[social-share]</code> to add social share icons to this page.</p>
 		<div class="inside-field-wrapper">
 			<label for="swellsocial_facebook_show">
 				<input type="checkbox" <?php echo $facebook_show ? "checked" : "" ; ?> id="swellsocial_facebook_show" name="swellsocial_facebook_show">
@@ -326,14 +333,19 @@ function swellsocial_save_metabox_post_sidebar($post_id) {
 */
 function SwellSocialGetFAIcon($slug) {
 		if(!$slug) return false;
+		$path = Swell_Social_PLUGIN_DIR . 'resources/fontawesome/';
 		switch ($slug) {
 				case 'x':
-						return "fab fa-x-twitter";
+						$path .= "brands/x-twitter.svg";
+						break;
 				case 'facebook':
-						return "fab fa-facebook";
+						$path .= "brands/facebook.svg";
+						break;
 				case 'email':
-						return "fa fa-envelope";
+						$path .= "regular/envelope.svg";
+						break;
 				default:
-						return "fab fa-$slug";
+						$path .= "brands/$slug.svg";
 		};
+		return file_get_contents($path);
 }
