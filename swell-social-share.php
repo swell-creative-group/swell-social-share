@@ -19,7 +19,7 @@ include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loa
 
 
 add_action('swellsocial_add_sharer_script', function () {
-	wp_register_script('sharer', 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
+	wp_enqueue_script('sharer', 'https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
 });
 
 function shortcode_footer_func() {
