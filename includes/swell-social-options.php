@@ -59,7 +59,8 @@ add_action( 'admin_init', 'swellsocial_settings_init' );
  */
 function swellsocial_section_developers_callback( $args ) {
 	?>
-	<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Follow the white rabbit.', 'swellsocial' ); ?></p>
+	<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Toggle post types where you would like to see the social share options available in the sidebar', 'swellsocial' ); ?></p>
+	<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php _e( 'Use the shortcode <code>[social-share]</code> to add social share icons to this page.', 'swellsocial' ); ?></p>
 	<?php
 }
 
