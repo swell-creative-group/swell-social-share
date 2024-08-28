@@ -19,9 +19,6 @@
             <?php if ( in_array($social['name'], $socials->options['subject']) && isset($social['copy']) ): ?>
               data-subject="<?php echo $social['copy'] ?: get_the_title(); ?>"
             <?php endif; ?>
-            <?php if ( in_array($social['name'], $socials->options['web']) ): ?>
-              data-web="true"
-            <?php endif; ?>
             <?php if ( in_array($social['name'], $socials->options['via']) && isset($social['via']) ): ?>
               data-via="<?php echo $social['via']; ?>"
             <?php endif; ?>
