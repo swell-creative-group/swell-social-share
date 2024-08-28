@@ -16,6 +16,7 @@
 
 define('Swell_Social_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
+include_once(Swell_Social_PLUGIN_DIR . 'includes/swell-social-options.php');
 
 
 add_action('swellsocial_add_sharer_script', function () {
@@ -47,6 +48,7 @@ add_shortcode( 'social-share', function ( $atts ) {
 	$whatsapp_show = get_post_meta( $post->ID, '_swellsocial_whatsapp_show', true );
 	$whatsapp_copy = get_post_meta( $post->ID, '_swellsocial_whatsapp_copy', true );
 	$reddit_show   = get_post_meta( $post->ID, '_swellsocial_reddit_show', true );
+	$reddit_copy 	 = get_post_meta( $post->ID, '_swellsocial_reddit_copy', true );
 	$platforms = [];
 	
 	if ($facebook_show) $platforms["facebook"] = [
@@ -70,6 +72,7 @@ add_shortcode( 'social-share', function ( $atts ) {
 	];
 	if ($reddit_show) $platforms["reddit"] = [
 		"name" => "reddit",
+		"copy" => $reddit_copy,
 	];
 
 	$attributes = shortcode_atts( [
@@ -109,8 +112,8 @@ if ( is_admin() ) {
  * Funtion to add a meta box to enable/disable the posts.
  */
 function swellsocial_add_metabox_post_sidebar() {
-
-  add_meta_box("social_share", __("Social share", 'swellsocial'), "swellsocial_social_fields", "page", "side", "high");
+	$active_post_types = get_option( 'swellsocial_options' );
+  add_meta_box("social_share", __("Social share", 'swellsocial'), "swellsocial_social_fields", $active_post_types, "side", "high");
 }
 
 function swellsocial_social_fields() {
@@ -123,6 +126,7 @@ function swellsocial_social_fields() {
 		$facebook_show = get_post_meta( $post->ID, '_swellsocial_facebook_show', true );
 		$linkedin_show = get_post_meta( $post->ID, '_swellsocial_linkedin_show', true );
 		$x_show 			 = get_post_meta( $post->ID, '_swellsocial_x_show', true );
+		$reddit_copy 	 = get_post_meta( $post->ID, '_swellsocial_reddit_copy', true );
 		$x_copy 			 = get_post_meta( $post->ID, '_swellsocial_x_copy', true );
 		$x_via 				 = get_post_meta( $post->ID, '_swellsocial_x_via', true );
 		$email_show 	 = get_post_meta( $post->ID, '_swellsocial_email_show', true );
@@ -199,6 +203,10 @@ function swellsocial_social_fields() {
 				<input type="checkbox" <?php echo $reddit_show ? "checked" : "" ; ?> id="swellsocial_reddit_show" name="swellsocial_reddit_show">
 				<?php _e("Show Reddit?", "swellsocial"); ?>
 			</label>
+			<div id="swellsocial_reddit_copy_wrapper" class="inside-field-wrapper--copy <?php echo ($reddit_show ? "" : "hidden") ; ?>">
+				<label for="swellsocial_reddit_copy" class="block" id="swellsocial_reddit_copy_label"><?php _e("Reddit title", "swellsocial"); ?></label>
+				<textarea id="swellsocial_reddit_copy" class="block" name="swellsocial_reddit_copy" rows="3" cols="25" aria-labelledby="swellsocial_reddit_copy_label"><?php echo $reddit_copy ?></textarea>
+			</div>
 		</div>
 
 		<!-- Hashtags -->
@@ -250,6 +258,7 @@ function swellsocial_social_fields() {
 			// Initialize visibility of textareas based on checkbox states
 			toggleTextarea('swellsocial_email_show', 'swellsocial_email_copy_wrapper');
 			toggleTextarea('swellsocial_whatsapp_show', 'swellsocial_whatsapp_copy_wrapper');
+			toggleTextarea('swellsocial_x_show', 'swellsocial_x_copy_wrapper');
 			toggleTextarea('swellsocial_x_show', 'swellsocial_x_copy_wrapper');
 		</script>
 
@@ -306,6 +315,7 @@ function swellsocial_save_metabox_post_sidebar($post_id) {
 		$linkedin_show = isset( $_POST['swellsocial_linkedin_show'] ) ? 1 : 0;
 		$x_show = isset( $_POST['swellsocial_x_show'] ) ? 1 : 0;
 		$x_copy = sanitize_text_field( $_POST['swellsocial_x_copy'] );
+		$x_copy = sanitize_text_field( $_POST['swellsocial_x_copy'] );
 		$x_via = sanitize_text_field( $_POST['swellsocial_x_via'] );
 		$email_show = isset( $_POST['swellsocial_email_show'] ) ? 1 : 0;
 		$email_copy = sanitize_text_field( $_POST['swellsocial_email_copy'] );
@@ -318,6 +328,7 @@ function swellsocial_save_metabox_post_sidebar($post_id) {
 		update_post_meta( $post_id, '_swellsocial_facebook_show', $facebook_show );
 		update_post_meta( $post_id, '_swellsocial_linkedin_show', $linkedin_show );
 		update_post_meta( $post_id, '_swellsocial_x_show', $x_show );
+		update_post_meta( $post_id, '_swellsocial_x_copy', $x_copy );
 		update_post_meta( $post_id, '_swellsocial_x_copy', $x_copy );
 		update_post_meta( $post_id, '_swellsocial_x_via', str_replace('@','', $x_via) );
 		update_post_meta( $post_id, '_swellsocial_email_show', $email_show );
