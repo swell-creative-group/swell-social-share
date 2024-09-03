@@ -165,7 +165,7 @@ function swellsocial_social_fields() {
 		<div class="inside-field-wrapper">
 			<label for="swellsocial_x_show">
 				<input type="checkbox" <?php echo $x_show ? "checked" : "" ; ?> id="swellsocial_x_show" name="swellsocial_x_show">
-				<?php _e("Show x?", "swellsocial"); ?>
+				<?php _e("Show X?", "swellsocial"); ?>
 			</label>
 			<div id="swellsocial_x_copy_wrapper" class="inside-field-wrapper--copy <?php echo ($x_show ? "" : "hidden") ; ?>">
 				<div>
