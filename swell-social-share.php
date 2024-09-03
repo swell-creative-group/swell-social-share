@@ -113,7 +113,14 @@ if ( is_admin() ) {
  */
 function swellsocial_add_metabox_post_sidebar() {
 	$active_post_types = get_option( 'swellsocial_options' );
-  add_meta_box("social_share", __("Social share", 'swellsocial'), "swellsocial_social_fields", $active_post_types, "side", "high");
+  add_meta_box(
+		"social_share", 
+		__("Social share", 'swellsocial'), 
+		"swellsocial_social_fields", 
+		$active_post_types, 
+		"side", 
+		"default"
+	);
 }
 
 function swellsocial_social_fields() {

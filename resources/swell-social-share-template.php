@@ -1,4 +1,4 @@
-<?php if (isset($socials->platforms)) : ?>
+<?php if (isset($socials->platforms) && count($socials->platforms) > 0 ) : ?>
   <div class="social-share">
     <h2 class="social-share--heading" name="social-share"><?php _e("Share on:", 'swellsocial'); ?></h2>
     <ul aria-labelledby="social-share" class="list-none ml-0 flex gap-4">
