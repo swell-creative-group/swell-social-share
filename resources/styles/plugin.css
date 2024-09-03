@@ -1,23 +1,39 @@
-.social-share h2 {
-  margin-bottom: .25rem;
+html {
+  --swell-social-share-icon-fill-color: rgba(36, 41, 46, 100%);
+  --swell-social-share-icon-hover-color: rgba(36, 41, 46, 75%);
+  --swell-social-share-icon-width: 2.25rem;
+  --swell-social-share-icon-gap: 1rem;
+  --swell-social-share-heading-margin: 0 0 .25rem 0;
+  --swell-social-share-heading-padding: 0;
+
 }
+
+.social-share button.social-share--button svg {
+  width: 100%;
+  height: 100%;
+}
+
+.social-share h2 {
+  margin: var(--swell-social-share-heading-margin);
+  padding: var(--swell-social-share-heading-padding);
+}
+
 .social-share ul {
   list-style: none;
   margin: 0;
   padding-left: 0;
   display: flex;
-  gap: 1rem;
+  gap: var(--swell-social-share-icon-gap);
 }
 
-.social-share button.social-share--button svg:hover path {
-  fill: rgba(36, 41, 46, 75%);
+.social-share button.social-share--button svg path {
+  fill: var(--swell-social-share-icon-fill-color);
 }
-.social-share button.social-share--button svg {
-  width: 100%;
-  height: 100%;
+.social-share button.social-share--button svg:hover path {
+  fill: var(--swell-social-share-icon-hover-color);
 }
 .social-share button.social-share--button {
-    width: 36px;
+    width: var(--swell-social-share-icon-width);
     height: auto;
     background: transparent;
     border: 0;
