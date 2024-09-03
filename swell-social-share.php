@@ -7,7 +7,7 @@
  * Author URI:      https://swellinc.co
  * Text Domain:     swell-social-share
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         1.1.1
  * Text Domain:     swellsocial
  *
  * @package         Swell_Social_Share
