@@ -1,7 +1,8 @@
 html {
   --swell-social-share-icon-fill-color: rgba(36, 41, 46, 100%);
   --swell-social-share-icon-hover-color: rgba(36, 41, 46, 75%);
-  --swell-social-share-icon-outline-color: rgb(51, 58, 65);
+  --swell-social-share-icon-outline-color: rgb(36, 41, 46);
+  --swell-social-share-icon-outline-offset: 2px;
   --swell-social-share-icon-width: 2.25rem;
   --swell-social-share-icon-gap: 1rem;
   --swell-social-share-icon-transition-duration: 0;
@@ -33,13 +34,14 @@ html {
   fill: var(--swell-social-share-icon-fill-color);
   transition: fill var(--swell-social-share-icon-transition-duration) var(--swell-social-share-icon-transition-function);
 }
-.social-share button.social-share--button svg:hover path,
-.social-share button.social-share--button svg:focus path {
+.social-share button.social-share--button:hover svg path,
+.social-share button.social-share--button:focus svg path {
   fill: var(--swell-social-share-icon-hover-color);
   transition: fill 250ms ease-in-out;
 }
-.social-share button.social-share--button svg:focus path { 
-  outline: 2px solid var(var(--swell-social-share-icon-outline-color))
+.social-share button.social-share--button:focus { 
+  outline: 2px auto var(--swell-social-share-icon-outline-color);
+  outline-offset: var(--swell-social-share-icon-outline-offset);
 }
 
 .social-share button.social-share--button {
