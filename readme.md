@@ -1,4 +1,4 @@
-### Swell Social Share
+# Swell Social Share
 *Contributors*: tboggia, andrescruz
 *Tags*: social media, marketing
 *Requires at least*: 8.0
@@ -26,7 +26,7 @@ Tests were deleted because they are currently unused. To bring bring them back, 
 
 ## Frequently Asked Questions
 
-# What social media apps are allowed?
+### What social media apps are allowed?
 * X
 * Facebook
 * Linkedin
@@ -34,18 +34,18 @@ Tests were deleted because they are currently unused. To bring bring them back, 
 * Whatsapp
 * Reddit
 
-# What can I customize?
+### What can I customize?
 1. You can override the icon systems through the SwellSocialGetFAIcon($slug) function. It returns the classes added to `<span>` element that contains the aria label for the icon.
 2. You can add your own `swell-social-share-template.php` in the `/resources/` folder of your theme.
 
 
 ## Changelog
-# 0.5
+### 0.5
 * Built the plugin.
 
-# 1.1.2
+### 1.1.2
 * Added CSS variables for improved customization
 * Reduced meta box priority
 
-# 1.2.0
+### 1.2.0
 * Added ability to update plugin from GitHub
