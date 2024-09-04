@@ -12,8 +12,6 @@ Swell, Inc. plugin to add social share functionality to all websites.
 
 
 == Description ==
-
-
 Creates a `[social-share]` shortcode and meta fields in 'post' post type.
 
 Built off of this command: `wp scaffold plugin swell-social-share --plugin_name=Swell_Social_Share --plugin_description=Nothing --plugin_author=tboggia --plugin_author_uri=https://swellinc.co `.
@@ -22,7 +20,6 @@ Tests were deleted because they are currently unused. To bring bring them back, 
 
 
 == Installation ==
-
 1. Upload the `swell-social-share` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Place `[social-share]` in your templates where you want the social share items to show up.
@@ -49,6 +46,9 @@ Tests were deleted because they are currently unused. To bring bring them back, 
 = 1.1.2 =
 * Added CSS variables for improved customization
 * Reduced meta box priority
+
+= 1.2.0 =
+* Added ability to update plugin from GitHub
 
 == Upgrade Notice ==
 None yet

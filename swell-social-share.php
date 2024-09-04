@@ -7,14 +7,17 @@
  * Author URI:      https://swellinc.co
  * Text Domain:     swell-social-share
  * Domain Path:     /languages
- * Version:         1.1.2
+ * Version:         1.2.0
  * Text Domain:     swellsocial
  *
  * @package         Swell_Social_Share
  */
 
 
+// namespace SwellSocial;
 define('Swell_Social_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
+
+require_once(Swell_Social_PLUGIN_DIR . 'includes/GitHubUpdater.php');
 include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
 include_once(Swell_Social_PLUGIN_DIR . 'includes/swell-social-options.php');
 
@@ -367,3 +370,6 @@ function SwellSocialGetFAIcon($slug) {
 		};
 		return file_get_contents($path);
 }
+
+$updater = new GitHubUpdater(__FILE__);
+$updater->add();
