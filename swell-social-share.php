@@ -7,7 +7,7 @@
  * Author URI:      https://swellinc.co
  * Text Domain:     swell-social-share
  * Domain Path:     /languages
- * Version:         1.1.1
+ * Version:         1.1.2
  * Text Domain:     swellsocial
  *
  * @package         Swell_Social_Share
@@ -119,7 +119,7 @@ function swellsocial_add_metabox_post_sidebar() {
 		"swellsocial_social_fields", 
 		$active_post_types, 
 		"side", 
-		"default"
+		"low"
 	);
 }
 
