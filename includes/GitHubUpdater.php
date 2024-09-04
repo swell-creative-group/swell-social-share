@@ -2,7 +2,6 @@
 /**
  * h/t https://ryansechrest.com/2024/04/how-to-enable-wordpress-to-update-your-custom-plugin-hosted-on-github/
  */
-// namespace SwellSocial\GitHubUpdater;
 
 class GitHubUpdater
 {

@@ -1,11 +1,12 @@
 <?php
 /**
  * Plugin Name:     Swell Social Share
- * Plugin URI:      https://swellinc.co/
- * Description:     Nothing
- * Author:          tboggia
+ * Plugin URI:      https://raw.githubusercontent.com/swell-creative-group/swell-social-share/master/readme.txt
+ * Description:     Swell, Inc. plugin to add social share functionality to all websites.
+ * Author:          swell-creative-group
  * Author URI:      https://swellinc.co
  * Text Domain:     swell-social-share
+ * Update URI:      https://github.com/swell-creative-group/swell-social-share/
  * Domain Path:     /languages
  * Version:         1.2.0
  * Text Domain:     swellsocial
@@ -13,13 +14,11 @@
  * @package         Swell_Social_Share
  */
 
-
-// namespace SwellSocial;
 define('Swell_Social_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 
 require_once(Swell_Social_PLUGIN_DIR . 'includes/GitHubUpdater.php');
 include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
-include_once(Swell_Social_PLUGIN_DIR . 'includes/swell-social-options.php');
+include_once(Swell_Social_PLUGIN_DIR . 'includes/class-swell-social-template-loader.php');
 
 
 add_action('swellsocial_add_sharer_script', function () {
