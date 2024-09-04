@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     Swell Social Share
- * Plugin URI:      https://raw.githubusercontent.com/swell-creative-group/swell-social-share/master/readme.txt
+ * Plugin URI:      https://raw.githubusercontent.com/swell-creative-group/swell-social-share/master/site/
  * Description:     Swell, Inc. plugin to add social share functionality to all websites.
  * Author:          swell-creative-group
  * Author URI:      https://swellinc.co
