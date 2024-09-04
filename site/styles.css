@@ -1,0 +1,73 @@
+body {
+  font-family: super, Georgia, Times, serif;
+  font-size: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+aside {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+h1 {
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 250%;
+}
+h1 > span {
+  font-family: super, Georgia, Times, serif;
+  font-weight: 500;
+
+}
+
+.icon-256 {
+  width: 256px;
+  height: 256px;
+  border: 1px solid black;
+}
+.icon-256 h1 {
+  font-size: 40px;
+}
+
+.icon-128 {
+  width: 128px;
+  height: 128px;
+  border: 1px solid black;
+}
+.icon-128 h1 {
+  font-size: 20px;
+}
+
+aside > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+
+aside svg {
+  width: 75%;
+  height: auto;
+}
+
+aside h1 {
+  margin-top: 0.5lh;
+  line-height: 1;
+}
