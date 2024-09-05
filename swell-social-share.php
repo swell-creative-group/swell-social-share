@@ -8,7 +8,7 @@
  * Text Domain:     swell-social-share
  * Update URI:      https://github.com/swell-creative-group/swell-social-share/
  * Domain Path:     /languages
- * Version:         1.2.3
+ * Version:         1.2.4
  * Text Domain:     swellsocial
  *
  * @package         Swell_Social_Share
