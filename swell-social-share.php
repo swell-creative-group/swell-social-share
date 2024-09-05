@@ -147,7 +147,7 @@ function swellsocial_social_fields() {
 		// Display the form, using the current value.
 		?>
 		<style><?php include Swell_Social_PLUGIN_DIR . 'resources/styles/admin.css'; ?></style>
-		<p><strong>Use the shortcode <code>[social-share]</code> to add social share icons to this page.</strong></p>
+		<p>Use the shortcode <code>[social-share]</code> to add social share icons to this page.</p>
 		<div class="inside-field-wrapper">
 			<label for="swellsocial_facebook_show">
 				<input type="checkbox" <?php echo $facebook_show ? "checked" : "" ; ?> id="swellsocial_facebook_show" name="swellsocial_facebook_show">
